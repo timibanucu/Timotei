@@ -1,0 +1,90 @@
+package TheBraveHero;
+
+import java.util.Random;
+
+public class PadureaFermecata {
+    public static void main(String[] args) {
+        Random random = new Random();
+        System.out.println("Dupa ce si-a baut cafeaua de dimineata, Carl a plecat la vanatoare in padurea fermecata,\n " +
+                 "unde a dat de o bestie");
+        for (int i = 1; i <= 20; i++) {
+            System.out.println("         ");
+            System.out.println("Tura " + i);
+
+            //Carl
+            int viata_carl = random.nextInt(31) + 65; // random num. 65 - 95
+            int putere_carl = random.nextInt(11) + 60; // random num. 60 - 70
+            int aparare_carl = random.nextInt(11) + 40; // random num. 40 - 50
+            int viteza_carl = random.nextInt(11) + 40; // random num. 40 - 50
+            int noroc_carl = random.nextInt(21) + 10; // random num. 10 - 30
+            //Bestie
+            int viata_bestie = random.nextInt(26) + 55; // random num. 55 - 80
+            int putere_bestie = random.nextInt(31) + 50; // random num. 50 - 80
+            int aparare_bestie = random.nextInt(21) + 35; // random num. 35 - 55
+            int viteza_bestie = random.nextInt(21) + 40; // random num. 40 - 60
+            int noroc_bestie = random.nextInt(16) + 25; // random num. 25 - 40
+
+            System.out.println("CARL: " + "  VIATA: " + viata_carl + " " + "PUTERE: " + putere_carl + " " + "APARARE: " + aparare_carl + " " + "VITEZA: " + viteza_carl + " " + "NOROC: " + noroc_carl);
+            System.out.println("BESTIE: " + "VIATA: " + viata_bestie + " " + "PUTERE: " + putere_bestie + " " + "APARARE: " + aparare_bestie + " " + "VITEZA: " + viteza_bestie + " " + "NOROC: " + noroc_bestie);
+
+            int damage_carl = putere_carl - aparare_bestie;
+            int damage_bestie = putere_bestie - aparare_carl;
+            //Puteri speciale
+            int fortaDragonului = random.nextInt(100) + 1;
+            if (fortaDragonului <= 10) {
+                damage_carl = damage_carl * 2;
+                System.out.println("Forta Dragonului ACTIVAT - Puterea lui Carl este dubla");
+            }
+            int scutulFermecat = random.nextInt(100) + 1;
+            if (scutulFermecat <= 20) {
+                damage_bestie = damage_bestie / 2;
+                System.out.println("Scutul Fermecat ACTIVAT - Carl va primi jumatate din atacul bestiei");
+            }
+
+            // Damage Carl
+            if (damage_carl < 0) {
+                damage_carl = 0;
+                if (damage_carl > 100)
+                    damage_carl = 100;
+            }
+
+
+            // Damage Bestie
+
+            if (damage_bestie < 0) {
+                damage_bestie = 0;
+                if (damage_bestie > 100)
+                    damage_bestie = 100;
+            }
+
+            // Atac
+            if (viteza_carl > viteza_bestie) {
+                viata_bestie = viata_bestie - damage_carl;
+                System.out.println("Carl a atacat: " + damage_carl);
+                System.out.println("Viata BESTIEI este: " + viata_bestie);
+            } else if (viteza_bestie > viteza_carl) {
+                viata_carl = viata_carl - damage_bestie;
+                System.out.println("Bestia a atacat: " + damage_bestie);
+                System.out.println("Viata lui CARL este: " + viata_carl);
+            } else if (viteza_carl == viteza_bestie) {
+                if (noroc_carl > noroc_bestie) {
+                    viata_bestie = viata_bestie - damage_carl;
+                    System.out.println("Carl a atacat: " + damage_carl);
+                    System.out.println("Viata BESTIEI este: " + viata_bestie);
+                } else {
+                    viata_carl = viata_carl - damage_bestie;
+                    System.out.println("Bestia a atacat: " + damage_bestie);
+                    System.out.println("Viata lui CARL este: " + viata_carl);
+                }
+            }
+            // GameOver
+            if (viata_bestie <= 0) {
+                System.out.println("Carl a invins BESTIA!!!");
+                i = 20;
+            } else if (viata_carl <= 0) {
+                System.out.println("BESTIA l-a invins pe CARL...");
+                i = 20;
+            }
+        }
+    }
+}
